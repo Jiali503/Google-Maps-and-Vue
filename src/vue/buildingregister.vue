@@ -24,4 +24,4 @@
   </div>
 </template>
 
-<script src="buildingregister.js"></script>
+<script src="./src/vue/buildingregister.js"></script>

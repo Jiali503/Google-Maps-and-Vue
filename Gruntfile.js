@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.initConfig({
     sass: {
       options: {
@@ -14,9 +15,22 @@ module.exports = function(grunt) {
         }
       }
     },
+    concat: {
+      options: {
+        separator: '\n\n',
+      },
+      dist: {
+        src: [
+          './node_modules/jquery/dist/jquery.js',
+          './node_modules/vue/dist/vue.js',
+          './node_modules/http-vue-loader/src/httpVueLoader.js'
+        ],
+        dest: './dist/vendor.js'
+      }
+    },
     watch: {
       styles: {
-        files: ['./*.scss'],
+        files: ['./src/scss/*.scss'],
         tasks: ['sass'],
         options: {
           spawn: false
@@ -24,5 +38,5 @@ module.exports = function(grunt) {
       }
     }
   });
-  grunt.registerTask('default', ['sass', 'watch']);
+  grunt.registerTask('default', ['sass', 'concat', 'watch']);
 };

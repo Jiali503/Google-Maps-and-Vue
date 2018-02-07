@@ -1,4 +1,4 @@
-var graph_path = graph_path || '';
+var graph_path = graph_path || './src/vue/';
 
 jQuery(function() {
   var vue_building_register = new Vue({
