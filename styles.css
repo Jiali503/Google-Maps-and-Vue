@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700");
+body, button {
+  font-family: "Open Sans", sans-serif;
+}
+
+#map {
+  width: 1024px;
+  height: 768px;
+}
+
+/*# sourceMappingURL=styles.css.map */

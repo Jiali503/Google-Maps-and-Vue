@@ -1,0 +1,22 @@
+{
+  "name": "buildingregister",
+  "version": "1.0.0",
+  "main": "script.js",
+  "dependencies": {
+    "express": "^4.16.2",
+    "grunt": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-sass": "^2.0.0",
+    "http-vue-loader": "^1.3.4",
+    "jquery": "^3.2.1",
+    "vue": "^2.5.13"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "node app.js",
+    "grunt": "grunt; grunt watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
