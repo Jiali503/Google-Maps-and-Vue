@@ -82,7 +82,9 @@ const gmapComponent = {
   watch: {
     mapoptions: function (newVal, oldVal) {
       console.log("Map Data Set");
-      console.log(newVal);
+      this.map.setZoom(newVal.zoom);
+      this.map.setCenter(newVal.center);
+      google.maps.event.trigger(this.map, 'resize');
     },
     mapmarkers: function (newVal, oldVal) {
       console.log("Map Markers Set");
@@ -150,16 +152,32 @@ module.exports = {
       alert(event.item.desc);
     },
     listItemClick: function(item) {
-      console.log("Clicked", item.title);
+      this.mapoptions = {
+        zoom: 10,
+        center: {
+          lat: item.latLng.lat,
+          lng: item.latLng.lng
+        }
+      };
     }
   },
   mounted: function() {
     // Load data.
     var self = this;
+
+    // Settings.
     jQuery.ajax({
-      url: 'http://echo.jsontest.com/title/Building%20Register',
+      url: './src/data/appdata.json',
       success: function(dataJSON) {
         self.title = decodeURI(dataJSON.title);
+      }
+    });
+
+    // Markers.
+    jQuery.ajax({
+      url: './src/data/markerdata.json',
+      success: function (dataJSON) {
+        self.mapmarkers = dataJSON.markers;
       }
     });
   }

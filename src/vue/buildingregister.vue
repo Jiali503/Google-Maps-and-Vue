@@ -11,11 +11,13 @@
       @markerclick="markerClick($event)"
     ></gmap>
     <div class="controls">
+      <h2>Controls</h2>
       <button @click="addMarker()">Add Marker</button>
       <button @click="removeAllMarkers()">Remove All Markers</button>
       <button @click="addPolygon()">Add Polygon</button>
       <button @click="removeAllPolygons()">Remove All Polygons</button>
     </div>
+    <h2>Markers</h2>
     <ul>
       <li v-for="item in mapmarkers" :key="item.id">
         <button @click="listItemClick(item)">{{ item.title }}</button>

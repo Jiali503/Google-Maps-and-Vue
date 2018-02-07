@@ -1,0 +1,13 @@
+{
+  "markers": [
+    {
+      "id": 0,
+      "title": "My Rating",
+      "latLng": {
+        "lat": -33.56,
+        "lng": 149.54
+      },
+      "desc": "My rating description."
+    }
+  ]
+}
