@@ -5,6 +5,21 @@
       <div class="filters">
         <h2>Search and Filters</h2>
         <input type="text" v-model="searchinput" @change="filterResults()" placeholder="Enter search terms">
+        <div class="field">
+          <label for="rating-type">Rating Type</label>
+          <select id="rating-type" v-model="filterRating" @change="updateFilter()">
+            <option value="">Select a rating type</option>
+            <option v-for="rating in filterRatings" :key="rating">{{ rating }}</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="building-type">Building Type</label>
+          <select id="building-type" v-model="filterBuilding" @change="updateFilter()">
+            <option value="">Select a building type</option>
+            <option value="home">Home</option>
+            <option value="office">Office</option>
+          </select>
+        </div>
       </div>
     </div>
     <div class="map-body">

@@ -107,6 +107,9 @@ module.exports = {
   },
   data: function() {
     return {
+      filterRating: 0,
+      filterBuilding: '',
+      filterRatings: [0, 1, 2, 3, 4, 5],
       title: "",
       searchinput: "",
       mapoptions: {
@@ -159,11 +162,47 @@ module.exports = {
           lng: item.latLng.lng
         }
       };
+    },
+    updateFilter: function() {
+      this.setQueryVariables({
+        rating: this.filterRating,
+        building: this.filterBuilding
+      });
+    },
+    setFilterFromURL: function() {
+      var q = this.getQueryVariables();
+      this.filterRating = q['rating'] || '';
+      this.filterBuilding = q['building'] || '';
+    },
+    getQueryVariables: function() {
+      var o = {};
+      var q = window.location.search.substring(1);
+      if (q.length > 0) {
+        var vars = q.split("&");
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split("=");
+          o[decodeURI(pair[0])] = decodeURI(pair[1]);
+        }
+      }
+      return o;
+    },
+    setQueryVariables: function(query_object) {
+      var qs = '?';
+      for (var key in query_object) {
+        if (query_object[key].length > 0) {
+          if (qs.length > 1) {
+            qs += '&';
+          }
+          qs += encodeURI(key) + '=' + encodeURI(query_object[key]);
+        }
+      }
+      history.pushState(query_object, '', qs);
     }
   },
   mounted: function() {
-    // Load data.
     var self = this;
+
+    this.setFilterFromURL();
 
     // Settings.
     jQuery.ajax({
@@ -180,5 +219,7 @@ module.exports = {
         self.mapmarkers = dataJSON.markers;
       }
     });
+
+    window.onpopstate = this.setFilterFromURL;
   }
 };
