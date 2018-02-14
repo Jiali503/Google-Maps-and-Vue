@@ -158,17 +158,19 @@ module.exports = {
         scaleControl: true
       },
       mapmarkers: [],
-      mappolygons: []
+      mappolygons: [],
+      visibleDetails: null
     }
   },
   methods: {
     addMarker: function() {
       console.log("Add Marker");
+      var randomid = Math.floor(Math.random() * 100);
       this.mapmarkers.push({
         id: this.mapmarkers.length,
-        title: "New Rating " + Math.floor(Math.random() * 100),
+        title: "New Rating " + randomid,
         latLng: { lat: -33 + (Math.random() * 2), lng: 149 + (Math.random() * 2) },
-        desc: "New Desc"
+        desc: "New Description for marker " + randomid
       });
     },
     removeAllMarkers: function() {
@@ -192,16 +194,10 @@ module.exports = {
       console.log(e);
     },
     markerClick: function(event) {
-      alert(event.item.desc);
+      this.showDetails(event.item);
     },
     listItemClick: function(item) {
-      this.mapoptions = {
-        zoom: 10,
-        center: {
-          lat: item.latLng.lat,
-          lng: item.latLng.lng
-        }
-      };
+      this.showDetails(item);
     },
     updateFilter: function() {
       this.setQueryVariables({
@@ -237,6 +233,16 @@ module.exports = {
         }
       }
       history.pushState(query_object, '', qs);
+    },
+    showDetails: function(marker) {
+      this.visibleDetails = marker;
+      this.mapoptions = {
+        zoom: 10,
+        center: {
+          lat: marker.latLng.lat,
+          lng: marker.latLng.lng
+        }
+      };
     }
   },
   mounted: function() {

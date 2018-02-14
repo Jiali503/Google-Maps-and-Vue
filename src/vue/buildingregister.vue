@@ -30,6 +30,12 @@
           :mappolygons="mappolygons"
           @markerclick="markerClick($event)"
         ></gmap>
+        <div v-if="visibleDetails" class="marker-details">
+          <button @click="visibleDetails = null">Close</button>
+          <div class="details">
+            {{ visibleDetails.desc }}
+          </div>
+        </div>
       </div>
       <div class="map-body-listing">
         <div class="controls">
