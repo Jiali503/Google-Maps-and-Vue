@@ -4,7 +4,7 @@
     <div class="map-header">
       <div class="filters">
         <h2>Search and Filters</h2>
-        <input type="text" v-model="searchinput" @change="filterResults()" placeholder="Enter search terms">
+        <search @selection="searchSelection($event)"></search>
         <div class="field">
           <label for="rating-type">Rating Type</label>
           <select id="rating-type" v-model="filterRating" @change="updateFilter()">

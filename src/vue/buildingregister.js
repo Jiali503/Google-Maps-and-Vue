@@ -1,5 +1,44 @@
 // ================================================================
-// MAP MODULE
+// SEARCH COMPONENT
+// ================================================================
+const searchComponent = {
+  template: `<input id="search-field" type="text" v-model="searchinput" placeholder="Enter search terms">`,
+  data: function () {
+    return {
+      searchinput: ""
+    }
+  },
+  methods: {
+    initAutocomplete: function() {
+      console.log("+> Initialize search component");
+      var _self = this;
+      var $search_field = jQuery('#search-field');
+      $search_field.autocomplete({
+        source: function(request, response) {
+          $.getJSON('./src/data/searchresults.json', function(resp) {
+            var rtn = [];
+            resp.forEach(function(item) {
+              rtn.push({label: item.title, value: item.title});
+            });
+            response(rtn);
+          });
+        }
+      });
+      $search_field.on('autocompleteselect', this.select);
+    },
+    select: function(event, ui) {
+      this.$emit('selection', ui);
+    }
+  },
+  mounted() {
+    this.initAutocomplete();
+  },
+  props: [],
+  watch: {}
+};
+
+// ================================================================
+// MAP COMPONENT
 // ================================================================
 const gmapComponent = {
   template: `<div id="map"></div>`,
@@ -13,7 +52,7 @@ const gmapComponent = {
   },
   methods: {
     initMap() {
-      console.log("Initialize map");
+      console.log("+> Initialize map");
       this.map = new google.maps.Map(document.getElementById('map'), this.mapoptions);
       this.addMarkers();
       this.addPolygons();
@@ -103,7 +142,8 @@ const gmapComponent = {
 // ================================================================
 module.exports = {
   components: {
-    gmap: gmapComponent
+    gmap: gmapComponent,
+    search: searchComponent
   },
   data: function() {
     return {
@@ -111,7 +151,7 @@ module.exports = {
       filterBuilding: '',
       filterRatings: [0, 1, 2, 3, 4, 5],
       title: "",
-      searchinput: "",
+      searchselection: "",
       mapoptions: {
         zoom: 8,
         center: { lat: -32, lng: 149 },
@@ -148,8 +188,8 @@ module.exports = {
     removeAllPolygons: function() {
       this.mappolygons = [];
     },
-    filterResults: function() {
-      console.log(this.searchinput);
+    searchSelection: function(e) {
+      console.log(e);
     },
     markerClick: function(event) {
       alert(event.item.desc);

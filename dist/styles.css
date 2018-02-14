@@ -23,4 +23,10 @@ body, button {
   overflow-y: scroll;
 }
 
+.ui-autocomplete {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 500px;
+}
+
 /*# sourceMappingURL=styles.css.map */

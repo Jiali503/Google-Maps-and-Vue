@@ -17,3 +17,9 @@ $map-height: 768px;
     overflow-y: scroll;
   }
 }
+
+.ui-autocomplete {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 500px;
+}

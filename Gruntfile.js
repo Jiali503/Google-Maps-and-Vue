@@ -22,6 +22,7 @@ module.exports = function(grunt) {
       dist: {
         src: [
           './node_modules/jquery/dist/jquery.js',
+          './node_modules/jquery-ui-dist/jquery-ui.js',
           './node_modules/vue/dist/vue.js',
           './node_modules/http-vue-loader/src/httpVueLoader.js'
         ],
