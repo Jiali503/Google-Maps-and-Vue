@@ -44,6 +44,8 @@
           <button @click="removeAllMarkers()">Remove All Markers</button>
           <button @click="addPolygon()">Add Polygon</button>
           <button @click="removeAllPolygons()">Remove All Polygons</button>
+          <button @click="bulkAddMarkers()">Add X Markers</button>
+          <input type="text" v-model="xmarkers" />
         </div>
         <h2>Markers</h2>
         <ul>

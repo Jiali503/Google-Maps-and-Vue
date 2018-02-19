@@ -147,6 +147,7 @@ module.exports = {
   },
   data: function() {
     return {
+      xmarkers: 10,
       filterRating: 0,
       filterBuilding: '',
       filterRatings: [0, 1, 2, 3, 4, 5],
@@ -169,13 +170,19 @@ module.exports = {
       this.mapmarkers.push({
         id: this.mapmarkers.length,
         title: "New Rating " + randomid,
-        latLng: { lat: -33 + (Math.random() * 2), lng: 149 + (Math.random() * 2) },
+        latLng: { lat: -31 + (Math.random() * 10), lng: 120 + (Math.random() * 25) },
         desc: "New Description for marker " + randomid
       });
     },
     removeAllMarkers: function() {
       console.log("Remove markers");
       this.mapmarkers = [];
+    },
+    bulkAddMarkers: function() {
+      this.removeAllPolygons();
+      for (var i = 0; i < this.xmarkers; i++) {
+        this.addMarker();
+      }
     },
     addPolygon: function() {
       console.log("Add Polygon");
