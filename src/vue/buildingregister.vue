@@ -6,19 +6,46 @@
         <h2>Search and Filters</h2>
         <search @selection="searchSelection($event)"></search>
         <div class="field">
-          <label for="rating-type">Rating Type</label>
-          <select id="rating-type" v-model="filterRating" @change="updateFilter()">
-            <option value="">Select a rating type</option>
-            <option v-for="rating in filterRatings" :key="rating">{{ rating }}</option>
+          <label for="building-type">Building type</label>
+          <select id="building-type" v-model="filterBuildingType" @change="updateFilter()">
+            <option value="">Select a building type</option>
+            <option value="office">Office</option>
+            <option value="hotel">Hotel</option>
+            <option value="shoppingcentre">Shopping Centre</option>
+            <option value="datacentre">Data Centre</option>
+            <option value="apartments">Apartments</option>
           </select>
         </div>
         <div class="field">
-          <label for="building-type">Building Type</label>
-          <select id="building-type" v-model="filterBuilding" @change="updateFilter()">
-            <option value="">Select a building type</option>
-            <option value="home">Home</option>
-            <option value="office">Office</option>
+          <label for="rating-scope">Rating scope</label>
+          <select id="rating-scope" v-model="filterRatingScope" @change="updateFilter()">
+            <option value="">Select a rating scope</option>
+            <option value="basebuilding">Base building</option>
+            <option value="wholebuilding">Whole building</option>
+            <option value="tenancy">Tenancy</option>
+            <option value="infrastructure">Infrastructure</option>
+            <option value="wholefacility">Whole facility</option>
+            <option value="itequipment">IT equipment</option>
           </select>
+        </div>
+        <div class="field">
+          <label for="rating-type">Rating type</label>
+          <select id="rating-type" v-model="filterRatingType" @change="updateFilter()">
+            <option value="">Select a rating type</option>
+            <option value="office">Office</option>
+            <option value="hotel">Hotel</option>
+            <option value="shoppingcentre">Shopping Centre</option>
+            <option value="datacentre">Data Centre</option>
+            <option value="apartments">Apartments</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="star-rating-from">Star rating (from)</label>
+          <input id="star-rating-from" type="number" v-model="filterStarRatingFrom" @change="updateFilter()">
+        </div>
+        <div class="field">
+          <label for="star-rating-to">Star rating (to)</label>
+          <input id="star-rating-to" type="number" v-model="filterStarRatingTo" @change="updateFilter()">
         </div>
       </div>
     </div>

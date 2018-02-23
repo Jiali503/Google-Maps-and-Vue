@@ -7,7 +7,21 @@
         "lat": -33.56,
         "lng": 149.54
       },
-      "desc": "My rating description."
+      "desc": "My rating description.",
+      "ratings": [
+        {
+          "starRating": 4,
+          "buildingType": "hotel",
+          "ratingScope": "basebuilding",
+          "ratingType": "office"
+        },
+        {
+          "starRating": 4,
+          "buildingType": "hotel",
+          "ratingScope": "wholebuilding",
+          "ratingType": "office"
+        }
+      ]
     }
   ]
 }

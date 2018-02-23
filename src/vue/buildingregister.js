@@ -148,9 +148,11 @@ module.exports = {
   data: function() {
     return {
       xmarkers: 10,
-      filterRating: 0,
-      filterBuilding: '',
-      filterRatings: [0, 1, 2, 3, 4, 5],
+      filterBuildingType: '',
+      filterRatingScope: '',
+      filterRatingType: '',
+      filterStarRatingFrom: 0,
+      filterStarRatingTo: 0,
       title: "",
       searchselection: "",
       mapoptions: {
@@ -171,7 +173,8 @@ module.exports = {
         id: this.mapmarkers.length,
         title: "New Rating " + randomid,
         latLng: { lat: -31 + (Math.random() * 10), lng: 120 + (Math.random() * 25) },
-        desc: "New Description for marker " + randomid
+        desc: "New Description for marker " + randomid,
+        starRating: Math.floor(Math.random() * 6)
       });
     },
     removeAllMarkers: function() {
@@ -208,14 +211,20 @@ module.exports = {
     },
     updateFilter: function() {
       this.setQueryVariables({
-        rating: this.filterRating,
-        building: this.filterBuilding
+        buildingtype: this.filterBuildingType,
+        ratingscope: this.filterRatingScope,
+        ratingtype: this.filterRatingType,
+        starratingfrom: this.filterStarRatingFrom,
+        starratingto: this.filterStarRatingTo
       });
     },
     setFilterFromURL: function() {
       var q = this.getQueryVariables();
-      this.filterRating = q['rating'] || '';
-      this.filterBuilding = q['building'] || '';
+      this.filterBuildingType = q['buildingtype'] || '';
+      this.filterRatingScope = q['ratingscope'] || '';
+      this.filterRatingType = q['ratingtype'] || '';
+      this.filterStarRatingFrom = q['starratingfrom'] || '';
+      this.filterStarRatingTo = q['starratingto'] || '';
     },
     getQueryVariables: function() {
       var o = {};
