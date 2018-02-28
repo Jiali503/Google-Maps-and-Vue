@@ -9,34 +9,27 @@
           <label for="building-type">Building type</label>
           <select id="building-type" v-model="filterBuildingType" @change="updateFilter()">
             <option value="">Select a building type</option>
-            <option value="office">Office</option>
-            <option value="hotel">Hotel</option>
-            <option value="shoppingcentre">Shopping Centre</option>
-            <option value="datacentre">Data Centre</option>
-            <option value="apartments">Apartments</option>
+            <option v-for="opt in allBuildingTypes" :key="opt.value" :value="opt.value">
+              {{ opt.label}}
+            </option>
           </select>
         </div>
         <div class="field">
           <label for="rating-scope">Rating scope</label>
           <select id="rating-scope" v-model="filterRatingScope" @change="updateFilter()">
             <option value="">Select a rating scope</option>
-            <option value="basebuilding">Base building</option>
-            <option value="wholebuilding">Whole building</option>
-            <option value="tenancy">Tenancy</option>
-            <option value="infrastructure">Infrastructure</option>
-            <option value="wholefacility">Whole facility</option>
-            <option value="itequipment">IT equipment</option>
+            <option v-for="opt in allRatingScopes" :key="opt.value" :value="opt.value">
+              {{ opt.label}}
+            </option>
           </select>
         </div>
         <div class="field">
           <label for="rating-type">Rating type</label>
           <select id="rating-type" v-model="filterRatingType" @change="updateFilter()">
             <option value="">Select a rating type</option>
-            <option value="office">Office</option>
-            <option value="hotel">Hotel</option>
-            <option value="shoppingcentre">Shopping Centre</option>
-            <option value="datacentre">Data Centre</option>
-            <option value="apartments">Apartments</option>
+            <option v-for="opt in allRatingTypes" :key="opt.value" :value="opt.value">
+              {{ opt.label}}
+            </option>
           </select>
         </div>
         <div class="field">
@@ -53,7 +46,7 @@
       <div class="map-body-map">
         <gmap
           :mapoptions="mapoptions"
-          :mapmarkers="mapmarkers"
+          :mapmarkers="filteredmarkers"
           :mappolygons="mappolygons"
           @markerclick="markerClick($event)"
         ></gmap>
@@ -61,6 +54,14 @@
           <button @click="visibleDetails = null">Close</button>
           <div class="details">
             {{ visibleDetails.desc }}
+            <ul>
+              <li v-for="(item, index) in visibleDetails.ratings" :key="index" class="rating-item">
+                <span><strong>Star Rating:</strong> {{ item.starRating }}</span>
+                <span><strong>Building Type:</strong> {{ item.buildingType }}</span>
+                <span><strong>Rating Scope:</strong> {{ item.ratingScope }}</span>
+                <span><strong>Rating Type:</strong> {{ item.ratingType }}</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -76,7 +77,7 @@
         </div>
         <h2>Markers</h2>
         <ul>
-          <li v-for="item in mapmarkers" :key="item.id">
+          <li v-for="item in filteredmarkers" :key="item.id">
             <button @click="listItemClick(item)">{{ item.title }}</button>
           </li>
         </ul>

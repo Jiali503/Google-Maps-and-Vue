@@ -147,6 +147,28 @@ module.exports = {
   },
   data: function() {
     return {
+      allBuildingTypes: [
+        { value: 'office', label: 'Office'},
+        { value: 'hotel', label: 'Hotel'},
+        { value: 'shoppingcentre', label: 'Shopping Centre'},
+        { value: 'datacentre', label: 'Data Centre'},
+        { value: 'apartments', label: 'Apartments'}
+      ],
+      allRatingScopes: [
+        { value: 'basebuilding', label: 'Base building'},
+        { value: 'wholebuilding', label: 'Whole building'},
+        { value: 'tenancy', label: 'Tenancy'},
+        { value: 'infrastructure', label: 'Infrastructure'},
+        { value: 'wholefacility', label: 'Whole facility'},
+        { value: 'itequipment', label: 'IT equipment'},
+      ],
+      allRatingTypes: [
+        { value: 'office', label: 'Office'},
+        { value: 'hotel', label: 'Hotel'},
+        { value: 'shoppingcentre', label: 'Shopping Centre'},
+        { value: 'datacentre', label: 'Data Centre'},
+        { value: 'apartments', label: 'Apartments'}
+      ],
       xmarkers: 10,
       filterBuildingType: '',
       filterRatingScope: '',
@@ -168,13 +190,23 @@ module.exports = {
   methods: {
     addMarker: function() {
       console.log("Add Marker");
+      var newRatings = [];
+      var r = Math.floor(Math.random() * 5);
+      for (var i = 0; i < r; i++) {
+        newRatings.push({
+          starRating: (Math.random() * 6).toFixed(2),
+          buildingType: this.allBuildingTypes[Math.floor(Math.random() * this.allBuildingTypes.length)].value,
+          ratingScope: this.allRatingScopes[Math.floor(Math.random() * this.allRatingScopes.length)].value,
+          ratingType: this.allRatingTypes[Math.floor(Math.random() * this.allRatingTypes.length)].value
+        });
+      }
       var randomid = Math.floor(Math.random() * 100);
       this.mapmarkers.push({
         id: this.mapmarkers.length,
         title: "New Rating " + randomid,
         latLng: { lat: -31 + (Math.random() * 10), lng: 120 + (Math.random() * 25) },
         desc: "New Description for marker " + randomid,
-        starRating: Math.floor(Math.random() * 6)
+        ratings: newRatings
       });
     },
     removeAllMarkers: function() {
@@ -283,5 +315,49 @@ module.exports = {
     });
 
     window.onpopstate = this.setFilterFromURL;
+  },
+  computed: {
+    filteredmarkers: function () {
+      var _self = this;
+      console.log(_self.filterStarRatingFrom, _self.filterStarRatingTo);
+      if (
+        _self.filterBuildingType == '' &&
+        _self.filterRatingScope =='' &&
+        _self.filterRatingType =='' &&
+        _self.filterStarRatingFrom == ('' || 0) &&
+        _self.filterStarRatingTo == ('' || 0)
+      ) {
+        // Nothing selected. Return all.
+        return this.mapmarkers;
+      }
+      else {
+        // Perform filter.
+        return this.mapmarkers.filter(function(item) {
+          var show = false;
+          item.ratings.forEach(function(rating) {
+            // Filter by building type.
+            if (rating.buildingType == _self.filterBuildingType) {
+              show = true;
+            }
+            // Filter by rating scope.
+            if (rating.ratingScope == _self.filterRatingScope) {
+              show = true;
+            }
+            // Filter by rating type.
+            if (rating.ratingType == _self.filterRatingType) {
+              show = true;
+            }
+            // Filter by star rating.
+            var sr = parseFloat(rating.starRating);
+            var fr = parseFloat(_self.filterStarRatingFrom);
+            var to = parseFloat(_self.filterStarRatingTo);
+            if (sr >= fr && sr <= to) {
+              show = true;
+            }
+          });
+          return show;
+        });
+      }
+    }
   }
 };

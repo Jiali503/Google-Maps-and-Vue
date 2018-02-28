@@ -37,6 +37,16 @@ body, button {
   bottom: 0;
   background-color: lightgrey;
   width: 300px;
+  overflow-y: scroll;
+}
+
+.rating-item {
+  border-bottom: 1px solid grey;
+  margin-bottom: 22px;
+}
+
+.rating-item span {
+  display: block;
 }
 
 /*# sourceMappingURL=styles.css.map */

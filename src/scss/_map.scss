@@ -32,4 +32,13 @@ $map-height: 768px;
   bottom: 0;
   background-color: lightgrey;
   width: 300px;
+  overflow-y: scroll;
+}
+
+.rating-item {
+  border-bottom: 1px solid grey;
+  margin-bottom: 22px;
+  span {
+    display: block;
+  }
 }
