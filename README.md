@@ -1,19 +1,21 @@
-# Google Maps and Vue
+# rating-register
 
-## Prerequisite
+> NABERS rating register
 
-1. [node.js](https://nodejs.org/en/download/) installed.
+## Build Setup
 
-## Installation
+``` bash
+# install dependencies
+npm install
 
-1. Clone repository
-2. From command line - run `npm install`
+# serve with hot reload at localhost:8080
+npm run dev
 
-## Run
+# build for production with minification
+npm run build
 
-1. From command line - run `npm run serve`
-2. Open your browser and go to http://localhost:3000
+# build for production and view the bundle analyzer report
+npm run build --report
+```
 
-## Build
-
-1. From command line - run `npm run grunt`
+For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

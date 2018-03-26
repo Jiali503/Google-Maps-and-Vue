@@ -1,0 +1,44 @@
+{
+  "markers": [
+    {
+      "id": 0,
+      "title": "First Marker (Hotel)",
+      "latLng": {
+        "lat": -33.56,
+        "lng": 149.54
+      },
+      "desc": "My first marker description.",
+      "ratings": [
+        {
+          "starRating": 4,
+          "buildingType": "hotel",
+          "ratingScope": "basebuilding",
+          "ratingType": "office"
+        },
+        {
+          "starRating": 1,
+          "buildingType": "hotel",
+          "ratingScope": "wholebuilding",
+          "ratingType": "office"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "title": "Second Marker (Shopping Centre)",
+      "latLng": {
+        "lat": -32.56,
+        "lng": 148.54
+      },
+      "desc": "My second marker description.",
+      "ratings": [
+        {
+          "starRating": 2.5,
+          "buildingType": "shoppingcentre",
+          "ratingScope": "wholebuilding",
+          "ratingType": "shoppingcentre"
+        }
+      ]
+    }
+  ]
+}
